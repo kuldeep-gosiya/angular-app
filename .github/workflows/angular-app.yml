@@ -27,12 +27,47 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
+name: angular-app
+
+on:
+  push:
+    branches: 
+       - master
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: use node js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install and build 
+      run: |
+        npm install
+        npm run build
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Run a multi-line script
+        run: |
+         mkdir ../build
+         cp -TR . ../build
+         tar -cvf deploy.tar ../build/
       - name: SSH deploy
-        uses: nogsantos/scp-deploy@master
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{secrets.HOST}}
           username: ${{secrets.USER}}
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
-          source: "/dist/*"
-          target: "/var/www/html/angular-app"
+          source: "deploy.tar"
+          target: "/var/www/html/angular-app/"
+
