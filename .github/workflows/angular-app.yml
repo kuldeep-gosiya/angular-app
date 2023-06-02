@@ -27,6 +27,11 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
+      - name: Run a multi-line script
+        run: |
+         mkdir ../build
+         cp -TR . ../build
+         tar -cvf deploy.tar ../build/
       - name: SSH deploy
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -34,5 +39,5 @@ jobs:
           username: ${{secrets.USER}}
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
-          source: "/tmp"
+          source: ""
           target: "/var/www/html/angular-app/"
