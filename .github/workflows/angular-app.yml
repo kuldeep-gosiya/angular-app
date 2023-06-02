@@ -39,5 +39,5 @@ jobs:
           username: ${{secrets.USER}}
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
-          source: ""
+          source: "deploy.tar"
           target: "/var/www/html/angular-app/"
