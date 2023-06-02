@@ -30,9 +30,9 @@ jobs:
       - name: SSH deploy
         uses: nogsantos/scp-deploy@master
         with:
-          host: ${{secrets.HOST}}
-          user: ${{secrets.USER}}
-          key: ${{secrets.KEY}}
-          port: ${{secrets.PORT}}
+          host: ${{secrets.SSH_HOST}}
+          user: ${{secrets.SSH_USER}}
+          key: ${{secrets.SSH_KEY}}
+          port: ${{secrets.SSH_PORT}}
           source: "/dist/*"
           target: "/var/www/html/angular-app"
