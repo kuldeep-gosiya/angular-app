@@ -22,17 +22,16 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: Run a multi-line script
-      run: |
-         mkdir ../build
-         cp -TR . ../build
-         tar -cvf deploy.tar ../build/
         
       
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: make zip file 
+        run: |
+          zip -r compressed_angular.zip disk
+    
       - name: SSH deploy
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -40,6 +39,6 @@ jobs:
           username: ${{secrets.USER}}
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
-          source: "deploy.tar"
+          source: "angular.zip"
           target: "/var/www/html/angular-app/"
 
