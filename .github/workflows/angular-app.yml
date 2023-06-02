@@ -29,11 +29,11 @@ jobs:
     steps:
       - name: SSH deploy
         uses: appleboy/scp-action@v0.1.4
-        with:
+        env:
           host: ${{secrets.HOST}}
           username: ${{secrets.USER}}
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
+        with:
           source: "dist/"
-          target: "/var/www/html/angular-app"
-          debug: true
+          target: "/var/www/html/angular-app/"
