@@ -28,7 +28,7 @@ jobs:
  
     steps:
       - name: SSH deploy
-        uses: appleboy/scp-deploy@v0.1.4
+        uses: appleboy/scp-deploy@master
         with:
           host: ${{secrets.HOST}}
           username: ${{secrets.USER}}
