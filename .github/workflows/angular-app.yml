@@ -23,7 +23,9 @@ jobs:
         npm install
         npm run build
     - name: make zip file 
-      run: zip -r compressed_angular.zip dist/  
+      run: |
+        sudo apt-get install zip
+        zip -r compressed_angular.zip dist/  
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -38,8 +40,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: package
-      - name: Display files in working directory
-        run: ls
       - name: SSH deploy
         uses: appleboy/scp-action@v0.1.4
         with:
