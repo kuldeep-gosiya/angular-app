@@ -31,7 +31,7 @@ jobs:
         uses: nogsantos/scp-deploy@master
         with:
           host: ${{secrets.HOST}}
-          username: ${{secrets.USER}}
+          user: ${{secrets.USER}}
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
           source: "/dist/*"
